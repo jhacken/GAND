@@ -17,3 +17,8 @@
 
 # nohup files
 nohup*
+
+# HPC files
+HPC_*.e
+HPC_*.o
+*.pbs
