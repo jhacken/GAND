@@ -79,7 +79,7 @@ In the fifth and final step, the sentences that passed all the filters are joine
 
 ### Python
 
-See `requirements.txt`. Tested with Python 3.13.5. The requirements can be installed automatically in one go by running the following command in your shell (preferably in a fresh virtual environment):
+See `requirements.txt`. Tested with Python 3.13.5 and CUDA 13.0. The requirements can be installed automatically in one go by running the following command in your shell (preferably in a fresh virtual environment):
 
 ```shell
 $ python -m pip install -r requirements.txt
