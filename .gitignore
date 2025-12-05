@@ -16,9 +16,9 @@
 /GAND_compilation/temp*
 
 # nohup files
-nohup*
+*nohup*
 
 # HPC files
-HPC_*.e
-HPC_*.o
-*.pbs
+*HPC_*.e*
+*HPC_*.o*
+*.pbs*
