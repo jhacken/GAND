@@ -23,18 +23,18 @@ The data processing script (called `process_dataSources_v1.py`) performs five ma
 $ python process_dataSources_v1.py OpenSubtitles
 ```
 
-For more information on the optional parameters that can be specified (i.e. the device on which the script should be run, the number of texts to be analysed, minimum and maximum sentence length, and the maximum number of sentences to be selected per referent entity), have a look at the [source code]() or run the command below.
+For more information on the optional parameters that can be specified (i.e. the device on which the script should be run, the number of texts to be analysed, minimum and maximum sentence length, and the maximum number of sentences to be selected per referent entity), have a look at the [source code](https://github.com/jhacken/GAND/blob/bdda2a89d3590ea56169b01403845cc8d419da76/GAND_compilation/process_dataSources_v1.py#L78) or run the command below.
 
 ```shell
-$ python process_datasets_v1.py -h
+$ python process_dataSources_v1.py -h
 ```
 
 To create the pool of candidate sentences from which the final GAND dataset was created, the following parameters were used:
 
 ```shell
-$ python process_datasets_v1.py C4 --device cuda:0 --n_texts_to_analyse 250000 --min_sentence_length 5 --max_sentence_length 30 --max_n_sentences_per_person 250
+$ python process_dataSources_v1.py C4 --device cuda:0 --n_texts_to_analyse 250000 --min_sentence_length 5 --max_sentence_length 30 --max_n_sentences_per_referent 250
 
-$ python process_datasets_v1.py OpenSubtitles --device cuda:0 --n_texts_to_analyse 250000 --min_sentence_length 5 --max_sentence_length 30 --max_n_sentences_per_person 250
+$ python process_dataSources_v1.py OpenSubtitles --device cuda:0 --n_texts_to_analyse 250000 --min_sentence_length 5 --max_sentence_length 30 --max_n_sentences_per_referent 250
 ```
 
 ### STEP_1
