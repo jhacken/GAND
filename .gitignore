@@ -1,0 +1,19 @@
+# virtual environment
+/venv*
+/.venv*
+
+# Python cache folders
+**/__pycache__
+
+# PyCharm folders
+/.idea
+
+# downloaded datasets
+/GAND_compilation/input*/downloadedDataSources
+
+# output and temp folders
+/GAND_compilation/output*
+/GAND_compilation/temp*
+
+# nohup files
+nohup*
