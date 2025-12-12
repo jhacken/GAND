@@ -12,8 +12,8 @@
 /GAND_compilation/input*/downloadedDataSources
 
 # output and temp folders
-/GAND_compilation/output*
-/GAND_compilation/temp*
+/GAND_*/output*
+/GAND_*/temp*
 
 # nohup files
 *nohup*
