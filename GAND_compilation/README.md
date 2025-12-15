@@ -93,7 +93,7 @@ In the fifth and final step, the sentences that passed all the filters are joine
 
 ## Creation of final GAND dataset
 
-[to describe]
+All sentences that passed the automatic processing step were then thoroughly manually verified to ensure full ambiguity. More information on this step is described in the methodology section of the paper itself in detail.
 
 ## Requirements
 

@@ -6,6 +6,10 @@ This repository presents GAND (Gender-Ambiguous Natural Data), a benchmarking re
 
 [This information will be added once the dataset has been published.]
 
+## Hugging Face
+
+[Upon acceptance of the GAND paper, the dataset will also be made available on Hugging Face.]
+
 ## How to cite this dataset
 
 [This information will be added once the dataset has been published.]
