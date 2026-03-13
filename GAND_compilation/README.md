@@ -32,9 +32,9 @@ $ python process_dataSources_v1.py -h
 To create the pool of candidate sentences from which the final GAND dataset was created, the following parameters were used:
 
 ```shell
-$ python process_dataSources_v1.py C4 --device cuda:0 --n_texts_to_analyse 250000 --min_sentence_length 5 --max_sentence_length 30 --max_n_sentences_per_referent 250
+$ python process_dataSources_v1.py C4 --device cuda:0 --n_texts_to_analyse 1000000 --min_sentence_length 10 --max_sentence_length 50 --max_n_sentences_per_referent 500
 
-$ python process_dataSources_v1.py OpenSubtitles --device cuda:0 --n_texts_to_analyse 250000 --min_sentence_length 5 --max_sentence_length 30 --max_n_sentences_per_referent 250
+$ python process_dataSources_v1.py OpenSubtitles --device cuda:0 --min_sentence_length 10 --max_sentence_length 50 --max_n_sentences_per_referent 250
 ```
 
 ### STEP_1
