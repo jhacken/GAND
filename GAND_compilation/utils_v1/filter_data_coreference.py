@@ -4,11 +4,12 @@ import os
 import stanza
 import sys
 from tqdm import tqdm
-from typing import Dict
+from typing import Dict, Optional
 
 
 def filter_coreference(
-        dataset_name: str, dict_sentences_per_referent: Dict, device: str, max_n_sentences_per_referent: int,
+        timestr: str, dataset_name: str, dict_sentences_per_referent: Dict, device: str,
+        max_n_sentences_per_referent: Optional[int],
         *,
         apply_filter_conjugated_verb: bool = True, exclude_sentences_with_multiple_instances_referent_word: bool = True,
         write_to_xlsx: bool = False
@@ -16,6 +17,7 @@ def filter_coreference(
     """Further filter the dictionary of sentences collected in STEP_3 by excluding sentences showing co-reference.
     Sentences are processed using Stanza (https://stanfordnlp.github.io/stanza/data_objects#document).
     The filtered set of sentences is saved in an XLSX file per referent.
+    :param timestr: Time string of current job.
     :param dataset_name: Name of the dataset to be filtered.
     :param dict_sentences_per_referent: Dictionary containing the previously collected sentences.
     :param device: Device on which the script should be run.
@@ -28,6 +30,12 @@ def filter_coreference(
     :param write_to_xlsx: Indicates whether results per item should be written to separate XLSXs. Defaults to `False`.
     :return: A dictionary containing the sentences that were filtered out.
     """
+    if max_n_sentences_per_referent is None:
+        max_n_sentences_per_referent_orig = None
+        max_n_sentences_per_referent = max([
+            len(dict_sentences_per_referent[ref]) for ref in dict_sentences_per_referent
+        ])
+
     # Load Stanza model
     if device == "cpu":
         nlp = stanza.Pipeline(
@@ -59,6 +67,12 @@ def filter_coreference(
     }
 
     # Loop over dictionary
+    d_stats = {
+        "n_unique_sentences_post": int, "max_n_sentences_per_referent": max_n_sentences_per_referent_orig,
+        "d_freq_per_referent_entity": {}
+    }
+    l_sents_in_all = []
+
     for referent, list_of_sentences in tqdm(list(dict_sentences_per_referent.items())):
         print(f"Processing {len(list_of_sentences)} sentences for '{referent}' ...")
 
@@ -518,6 +532,7 @@ def filter_coreference(
                     [idx for idx, tok in enumerate(l_toks_text) if tok == referent]
                 )
                 l_sents_in.append((tup_idxs_referent, l_toks_text, sentence))
+                l_sents_in_all.append(sentence)
 
             # If maximum number of sentences is reached, write results to XLSX and go to next word
             if n_sents_processed != len(list_of_sentences):
@@ -526,23 +541,41 @@ def filter_coreference(
                     max_n_sentences_per_referent_reached = True
                     print(f"Maximum number of {max_n_sentences_per_referent} filtered sentences is reached for "
                           f"'{referent}'.")
-                    dump_json(os.path.join("temp_v1", "sentences_selected_perItem", dataset_name), f"{referent}.json", l_sents_in)
+                    dump_json(
+                        os.path.join("temp_v1", "sentences_selected_perItem", f"{dataset_name}_{timestr}"),
+                        f"{referent}.json",
+                        l_sents_in
+                    )
 
                     if write_to_xlsx:
                         filtered_sentences_to_xlsx(
-                            os.path.join("output_v1", "sentences_selected_perItem", dataset_name), referent, l_sents_in
+                            os.path.join("output_v1", "sentences_selected_perItem", f"{dataset_name}_{timestr}"),
+                            referent, l_sents_in
                         )
                     
                     break
 
         # If maximum number is never reached, write results to XLSX after processing the final sentence
         if not max_n_sentences_per_referent_reached:
-            dump_json(os.path.join("temp_v1", "sentences_selected_perItem", dataset_name), f"{referent}.json", l_sents_in)
+            dump_json(
+                os.path.join("temp_v1", "sentences_selected_perItem", f"{dataset_name}_{timestr}"),
+                f"{referent}.json",
+                l_sents_in
+            )
+            d_stats["d_freq_per_referent_entity"][referent] = len(l_sents_in)
 
             if write_to_xlsx:
                 filtered_sentences_to_xlsx(
-                    os.path.join("output_v1", "sentences_selected_perItem", dataset_name), referent, l_sents_in
+                    os.path.join("output_v1", "sentences_selected_perItem", f"{dataset_name}_{timestr}"),
+                    referent, l_sents_in
                 )
-            
+
+    d_stats["n_unique_sentences_post"] = len(set(l_sents_in_all))
+    dump_json(
+        os.path.join("output_v1", "stats"),
+        f"d_stats_filter_data_coreference_{dataset_name}_{timestr}.json",
+        d_stats,
+        indent=2
+    )
 
     return dict_sents_filtered_out

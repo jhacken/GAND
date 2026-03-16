@@ -1,4 +1,6 @@
+from utils_v1.process_JSONs import dump_json
 from datasets import IterableDataset
+import os
 from sentence_splitter import SentenceSplitter
 from spacy.lang.en import English
 import sys
@@ -7,10 +9,11 @@ from typing import Dict, List
 
 
 def filter_referent_entities(
-        dataset_name: str, list_of_referents: List, dataset: IterableDataset, len_dataset: int, n_texts_to_analyse: int,
-        min_sentence_length: int, max_sentence_length: int
+        timestr: str, dataset_name: str, list_of_referents: List, dataset: IterableDataset, len_dataset: int,
+        n_texts_to_analyse: int, min_sentence_length: int, max_sentence_length: int
 ) -> Dict:
     """Filter the dataset by excluding all sentences that do not include any of the referent entities.
+    :param timestr: Time string of current job.
     :param dataset_name: Name of the dataset to be filtered.
     :param list_of_referents: List containing the referent entities.
     :param dataset: The dataset.
@@ -32,6 +35,11 @@ def filter_referent_entities(
     set_of_referents = set(list_of_referents)
     dict_sentences_per_referent = {referent: [] for referent in sorted(set_of_referents)}
     n_matches = 0
+    d_stats = {
+        "n_texts_analysed": min([n_texts_to_analyse, len_dataset]),
+        "min_sentence_length": min_sentence_length, "max_sentence_length": max_sentence_length,
+        "n_unique_sentences_pre": 0, "n_unique_sentences_post": 0, "d_freq_per_referent_entity": Dict
+        }
     
     for idx, item in tqdm(enumerate(dataset_shuffled), total=n_texts_to_analyse):
 
@@ -42,6 +50,7 @@ def filter_referent_entities(
         list_sents = splitter.split(text=text)
 
         for sent in list_sents:
+            d_stats["n_unique_sentences_pre"] += 1
             words = [tok.text for tok in spacy_tokenizer(sent)]
 
             # Sentences that do not meet sentence length criteria are discarded
@@ -56,8 +65,20 @@ def filter_referent_entities(
                         n_matches += 1
                         dict_sentences_per_referent[match].append(sent)
 
+                    if len(matches) >= 1:  # avoid counting the same sentence twice (otherwise the number of sentences post could theoretically be larger than the number of sentences pre)
+                        d_stats["n_unique_sentences_post"] += 1
+
     print(f"\t- Number of filtered sentences after first processing step (total): {n_matches}.")
     d_freq_per_referent_entity = {referent: len(dict_sentences_per_referent[referent]) for referent in sorted(set_of_referents)}
     print(f"\t- Number of filtered sentences after first processing step (per referent entity):\n\t{d_freq_per_referent_entity}.")
+
+    # Dump statistics to JSON file
+    d_stats["d_freq_per_referent_entity"] = d_freq_per_referent_entity
+    dump_json(
+        os.path.join("output_v1", "stats"),
+        f"d_stats_filter_data_referentEntities_{dataset_name}_{timestr}.json",
+        d_stats,
+        indent=2
+    )
 
     return dict_sentences_per_referent

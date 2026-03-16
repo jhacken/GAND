@@ -1,5 +1,4 @@
 from .process_JSONs import load_json
-import codecs
 import os
 from pathlib import Path
 import sys
@@ -72,10 +71,11 @@ def filtered_sentences_to_xlsx(path_direc: Union[str, Path], referent: str, l_se
 
 
 def merge_data_per_item_into_single_xlsx(
-        dataset_name: str, list_of_referents: List, d_referents_to_source: Dict, d_meta: Dict,
+        timestr: str, dataset_name: str, list_of_referents: List, d_referents_to_source: Dict, d_meta: Dict,
         path_direc_inp: Union[str, Path], path_direc_outp: Union[str, Path]
 ) -> None:
     """Join the selected sentences per item into one single overarching XLSX.
+    :param timestr: Time string of current job.
     :param dataset_name: Name of the dataset to be filtered.
     :param list_of_referents: List containing the referent entities.
     :param d_referents_to_source: Dictionary in which the referent entities are linked to their source (i.e.
@@ -89,7 +89,7 @@ def merge_data_per_item_into_single_xlsx(
         os.makedirs(path_direc_outp)
 
     # Create spreadsheet
-    fn_xlsx = f"sentences_selected_joined_{dataset_name}.xlsx"
+    fn_xlsx = f"sentences_selected_joined_{dataset_name}_{timestr}.xlsx"
     path_xlsx = os.path.join(path_direc_outp, fn_xlsx)
     wb = Workbook(path_xlsx)
     ws = wb.add_worksheet("selectedSents")
@@ -187,7 +187,7 @@ def sentences_filtered_out_to_txt(
     # Loop iteratively over rules, referent entities, and sentences in dictionary
     for rule in dict_sents_filtered_out:
 
-        with codecs.open(os.path.join(path_direc, f"{rule}.txt"), "w", "utf-8") as f:
+        with open(os.path.join(path_direc, f"{rule}.txt"), mode="w", encoding="utf-8") as f:
 
             for referent in dict_sents_filtered_out[rule]:
             

@@ -1,4 +1,3 @@
-import codecs
 from datasets import IterableDataset, load_dataset
 import os
 from pathlib import Path
@@ -17,7 +16,7 @@ def load_c4_data(
     :return: The loaded dataset and the number of texts in the dataset.
     """
     dataset = load_dataset(dataset_path, subdataset_name, split=dataset_split, streaming=True)
-    len_dataset = dataset.info.splits["train"].num_examples
+    len_dataset = dataset.info.splits[dataset_split].num_examples
     print(f"\t- The dataset contains {len_dataset:,d} texts.")
 
     # Print first item of dataset
@@ -32,17 +31,15 @@ def load_c4_data(
     return dataset, len_dataset
 
 
-def load_open_subtitles_data(dataset_name: str, n_texts_to_analyse: int) -> Tuple[IterableDataset, int]:
+def load_open_subtitles_data(n_texts_to_analyse: int) -> Tuple[IterableDataset, int]:
     """Load Open Subtitles data from https://opus.nlpl.eu/OpenSubtitles/corpus/version/OpenSubtitles
     (https://object.pouta.csc.fi/OPUS-OpenSubtitles/v1/mono/en.txt.gz).
-    :param dataset_name: Name of the dataset to be filtered.
     :param n_texts_to_analyse: The number of texts from the dataset to analyse.
     :return: The loaded dataset and the number of texts in the dataset.
     """
-    if dataset_name == "OpenSubtitles":
-        dataset_path = os.path.join("input_v1", "downloadedDataSources", "OpenSubtitles", "en.txt")
+    dataset_path = os.path.join("input_v1", "downloadedDataSources", "OpenSubtitles", "en.txt")
 
-    with codecs.open(dataset_path, "r", "utf-8") as f:
+    with open(dataset_path, mode="r", encoding="utf-8") as f:
         l_lines = [line.strip() for line in f.readlines()]
     f.close()
 
