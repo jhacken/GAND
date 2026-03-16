@@ -23,7 +23,7 @@ The data processing script (called `process_dataSources_v1.py`) performs five ma
 $ python process_dataSources_v1.py OpenSubtitles
 ```
 
-For more information on the optional parameters that can be specified (i.e. the device on which the script should be run, the number of texts to be analysed, minimum and maximum sentence length, and the maximum number of sentences to be selected per referent entity), have a look at the [source code]() or run the command below.
+For more information on the optional parameters that can be specified (i.e. the device on which the script should be run, the number of texts to be analysed, minimum and maximum sentence length, and the maximum number of sentences to be selected per referent entity), have a look at the [source code](https://github.com/jhacken/GAND/blob/a5e80481b383faf8bbc320e59260e51ac76fdf45/GAND_compilation/process_dataSources_v1.py#L79) or run the command below.
 
 ```shell
 $ python process_dataSources_v1.py -h
