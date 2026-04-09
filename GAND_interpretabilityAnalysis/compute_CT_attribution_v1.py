@@ -28,7 +28,7 @@ def open_gand_xlsx(path_to_xlsx: Union[str, Path], target_language: str) -> Tupl
     en_source = gand_contrastive["EN_source_sentence"].tolist()
     dataset_length = len(en_source)
     opus_mt = gand_contrastive[f"OPUS_{target_language}_translation"].tolist()
-    opus_mt_contrastive = gand_contrastive[f"OPUS_{target_language}_Contrastive"].tolist()
+    opus_mt_contrastive = gand_contrastive[f"{target_language}_contrastive_TR"].tolist()
 
     print("\n=== GAND EXAMPLE ===")
     print(f"EN Source: {en_source[0]}")
@@ -116,12 +116,12 @@ def compute_all_attribution_saliency_scores(
 def get_top_salient_words(
         all_contrastive_attributions: Dict, target_language: str,
         *,
-        percent: float = 0.2
+        percent: float = 0.15
 ) -> Dict:
     """Threshold function to select top salient words.
     :param all_contrastive_attributions: Attribution dictionary.
     :param target_language: The target language.
-    :param percent: Top x% of salient words chosen based on total attribution value per length. Defaults to 20%.
+    :param percent: Top x% of salient words chosen based on total attribution value per length. Defaults to 15%.
     :return: A dictionary containing the top salient words and their corresponding values.
     """
     # Stopwords

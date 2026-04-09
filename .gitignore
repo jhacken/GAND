@@ -11,7 +11,8 @@
 # downloaded datasets
 /GAND_compilation/input*/downloadedDataSources
 
-# output and temp folders
+# deprecated, output and temp folders
+/GAND_*/deprecated*
 /GAND_*/output*
 /GAND_*/temp*
 

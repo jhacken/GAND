@@ -102,7 +102,7 @@ def find_hyphenated_sequence(doc: Doc, hyphenated_word: str) -> Optional[Token]:
     return None
 
 
-def find_contraction_sequence(doc, contraction_word) -> Optional[Token]:
+def find_contraction_sequence(doc: Doc, contraction_word: str) -> Optional[Token]:
     """Find a sequence of tokens that make up a contraction or possessive.
     :param doc: The spaCy Doc.
     :param contraction_word: The contraction or possessive word.
