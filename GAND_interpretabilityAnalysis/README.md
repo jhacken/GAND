@@ -1,6 +1,6 @@
 # GAND (interpretability analysis)
 
-Run the commands below to replicate the interpretability analysis presented in the GAND paper (from this directory as your working directory). Output files are saved into an automatically created output folder.
+Run the commands below to replicate the interpretability analysis presented in Hackenbuchner et al. (forthcoming). Make sure to run the commands from this directory as your working directory. Output files are saved into an automatically created output folder.
 
 1. Compute contrastive translation attribution
 
