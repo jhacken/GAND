@@ -4,7 +4,7 @@ This repository presents GAND (Gender-Ambiguous Natural Data), a benchmarking re
 
 ## DOI
 
-[This information will be added once the dataset has been published.]
+<https://doi.org/10.5281/zenodo.20324374>
 
 ## Hugging Face
 
@@ -12,7 +12,7 @@ This repository presents GAND (Gender-Ambiguous Natural Data), a benchmarking re
 
 ## How to cite this dataset
 
-[This information will be added once the dataset has been published.]
+Hackenbuchner, J., Degraeuwe, J., Tezcan, A., & Daems, J. (2026). GAND Dataset: Gender-Ambiguous Natural Data (v1.0.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.20324375
 
 ## Related papers
 
