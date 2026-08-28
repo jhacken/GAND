@@ -30,6 +30,21 @@
 
     "title": "GAND Dataset: Gender-Ambiguous Natural Data",
 
+    "related_identifiers": [
+        {
+            "scheme": "url",
+            "identifier": "https://aclanthology.org/2026.eamt-1.18/",
+            "relation": "isDocumentedBy",
+            "resource_type": "publication-conferencepaper"
+        },
+        {
+            "scheme": "url",
+            "identifier": "https://huggingface.co/datasets/jhacken/GAND",
+            "relation": "isSupplementedBy",
+            "resource_type": "dataset"
+        }
+    ],
+
     "keywords": ["gender ambiguity", "natural data", "machine translation", "natural language processing", "contrastive translation"],
 
     "communities": [
