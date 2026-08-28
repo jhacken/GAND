@@ -16,13 +16,13 @@ Hackenbuchner, J., Degraeuwe, J., Tezcan, A., & Daems, J. (2026). GAND Dataset: 
 
 ## Related papers
 
-- EAMT2026: Hackenbuchner et al. (forthcoming)
+- EAMT2026: Hackenbuchner et al. (2026)
 
 **NOTE**: Any materials supplementing these related papers are included in the `supplementaryMaterials` directory.
 
 ## Interpretability analysis
 
-The scripts that were used to perform the interpretability analysis presented in Hackenbuchner et al. (forthcoming) are included in `GAND_interpretabilityAnalysis`.
+The scripts that were used to perform the interpretability analysis presented in Hackenbuchner et al. (2026) are included in `GAND_interpretabilityAnalysis`.
 
 ## Acknowledgements
 
@@ -30,4 +30,4 @@ GAND was developed as part of a strategic basic PhD research (1SH5V24N) fully fu
 
 ## References
 
-- Hackenbuchner, J., Degraeuwe, J., Tezcan, A., & Daems, J. (forthcoming). Explaining GAND: A Resource on Gender-Ambiguous Natural Data & Contrastive Attribution. In *Proceedings of the 26th Annual Conference of the European Association for Machine Translation*. Tilburg, the Netherlands. European Association for Machine Translation (EAMT).
+- Hackenbuchner, J., Degraeuwe, J., Tezcan, A., & Daems, J. (2026). Explaining GAND: A Resource on Gender-Ambiguous Natural Data & Contrastive Attribution. In D. Shterionov, E. Vanmassenhove, M. De Sisto, F. Blain, J. Pourmostafa Roshan Sharami, L. Lepp, C. Manna, A. A. Rescigno, A. Karakanta, A. Rigouts Terryn, M. Lardelli, N. Resende, E. Murgolo, J. Hackenbuchner, A. Zaretskaya, M. Esplà-Gomis, T. Etchegoyhen, D. Gromann, R. Bawden, ... H. Moniz (Eds), *Proceedings of the 26th Annual Conference of the European Association for Machine Translation (Volume 1)* (pp. 245–267). European Association for Machine Translation. https://aclanthology.org/2026.eamt-1.18/
