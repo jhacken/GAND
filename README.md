@@ -12,7 +12,7 @@ This repository presents GAND (Gender-Ambiguous Natural Data), a benchmarking re
 
 ## How to cite this dataset
 
-Hackenbuchner, J., Degraeuwe, J., Tezcan, A., & Daems, J. (2026). GAND Dataset: Gender-Ambiguous Natural Data (v1.1.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.20324375
+Hackenbuchner, J., Degraeuwe, J., Tezcan, A., & Daems, J. (2026). GAND Dataset: Gender-Ambiguous Natural Data (v1.1.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.22144723
 
 ## Related papers
 
